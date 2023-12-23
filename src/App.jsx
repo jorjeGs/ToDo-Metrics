@@ -1,14 +1,18 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Welcome from './pages/Welcome'
+import NotFound from './pages/NotFound'
 import './App.css'
 
 function App() {
 
   return (
     <main className='App'>
-      <h1>ToDo MetriXs</h1>
-      <div className='container'>
-        <h2>Welcome!</h2>
-        <p>This is just the begining, let's grow <strong>together</strong></p>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Welcome />} />
+          <Route path='/*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </main>
   )
 }
