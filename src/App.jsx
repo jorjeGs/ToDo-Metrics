@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Welcome from './pages/Welcome'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
+import About from './pages/About'
 import './App.css'
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
         <Routes>
           <Route index element={<Welcome />} />
           <Route path='/welcome' element={<Welcome />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home/*' element={<Home />} />
+          <Route path='/about' element={<About />} />
           <Route path='/*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

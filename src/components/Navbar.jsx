@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { LuMenuSquare } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
+import { FaGithub } from "react-icons/fa";
 import './Navbar.css'
 
 const Navbar = () => {
@@ -35,7 +36,7 @@ const Navbar = () => {
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
                     <li>
-                        <Link to='/about'>About</Link>
+                        <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-2xl' /></a>
                     </li>
                 </ul>
                 <ul>
@@ -52,7 +53,7 @@ const Navbar = () => {
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
                     <li className='hideOnMobile'>
-                        <Link to='/about'>About</Link>
+                        <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-2xl' /></a>
                     </li >
                     <li onClick={showSidebar} className='menu-icon'>
                         <a><LuMenuSquare className='text-3xl' /></a>
