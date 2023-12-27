@@ -23,13 +23,16 @@ const Navbar = () => {
                         <a><MdOutlineClose className='text-3xl' /></a>
                     </li>
                     <li>
-                        <Link to='/'>Welcome</Link>
+                        <Link to='/'><p className='text-red-500'>Logout</p></Link>
                     </li>
                     <li>
                         <Link to='/home'>Home</Link>
                     </li>
                     <li>
-                        <Link to='/metrics'>Metrixs</Link>
+                        <Link to='/home/tables'>Tables</Link>
+                    </li>
+                    <li>
+                        <Link to='/home/metrics'>Metrixs</Link>
                     </li>
                     <li>
                         <Link to='/about'>About</Link>
@@ -37,13 +40,16 @@ const Navbar = () => {
                 </ul>
                 <ul>
                     <li>
-                        <Link to='/'>Welcome</Link>
+                        <Link to='/'><p className='text-red-500'>Logout</p></Link>
                     </li>
                     <li className='hideOnMobile'>
                         <Link to='/home'>Home</Link>
                     </li>
                     <li className='hideOnMobile'>
-                        <Link to='/metrics'>Metrixs</Link>
+                        <Link to='/home/tables'>Tables</Link>
+                    </li>
+                    <li className='hideOnMobile'>
+                        <Link to='/home/metrics'>Metrixs</Link>
                     </li>
                     <li className='hideOnMobile'>
                         <Link to='/about'>About</Link>
