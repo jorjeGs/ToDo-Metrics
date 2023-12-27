@@ -1,9 +1,33 @@
-#root {
-  margin: 0 auto;
-  padding: 1rem;
+.App {
+  display: flex;
+  flex-direction: column;
   background-color: white;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: auto;
 }
 
-.App {
-  text-align: center;
+.primary-btn{
+  color: white;
+  background-color: black;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 2px;
+  border-radius: 1.5rem;
+  font-weight: 700;
+  transition-timing-function: ease-in-out;
+  transition-duration: 300ms;
+}
+
+.primary-btn:hover{
+  color: black;
+  background-color: white;
+  border-color: rgb(113 113 122);
+}
+
+.primary-btn:focus{
+  /*search for good focus effects to not lose accesibility*/
 }
