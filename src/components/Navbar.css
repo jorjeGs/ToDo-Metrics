@@ -18,6 +18,7 @@
 
 .menu a{
     height: 100%;
+    font-size: 1rem;
     padding: 0 30px;
     text-decoration: none;
     display: flex;
@@ -52,6 +53,10 @@
 
 .menu .sidebar li, a{
     width: 100%;
+}
+
+.menu .sidebar a{
+    font-size: 1.5rem;
 }
 
 .menu-icon{

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { LuMenuSquare } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
+import { GrPowerShutdown } from "react-icons/gr";
 import './Navbar.css'
 
 const Navbar = () => {
@@ -23,26 +24,26 @@ const Navbar = () => {
                     <li onClick={hideSidebar}>
                         <a><MdOutlineClose className='text-3xl' /></a>
                     </li>
-                    <li>
-                        <Link to='/'><p className='text-red-500'>Logout</p></Link>
-                    </li>
-                    <li>
+                    <li onClick={hideSidebar}>
                         <Link to='/home'>Home</Link>
                     </li>
-                    <li>
+                    <li onClick={hideSidebar}>
                         <Link to='/home/tables'>Tables</Link>
                     </li>
-                    <li>
+                    <li onClick={hideSidebar}>
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
-                    <li>
-                        <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-2xl' /></a>
+                    <li onClick={hideSidebar}>
+                        <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
+                    </li>
+                    <li onClick={hideSidebar}>
+                        <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-3xl' /></a>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <Link to='/'><p className='text-red-500'>Logout</p></Link>
-                    </li>
+                        <Link to='/home'><img src='/todo-logo.svg' className='w-8' alt='logo' /></Link>
+                    </li> 
                     <li className='hideOnMobile'>
                         <Link to='/home'>Home</Link>
                     </li>
@@ -51,6 +52,9 @@ const Navbar = () => {
                     </li>
                     <li className='hideOnMobile'>
                         <Link to='/home/metrics'>Metrixs</Link>
+                    </li>
+                    <li className='hideOnMobile'>
+                        <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
                     </li>
                     <li className='hideOnMobile'>
                         <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-2xl' /></a>
