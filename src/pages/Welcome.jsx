@@ -1,7 +1,22 @@
-import { Link } from "react-router-dom"
+import { useEffect } from "react"
 import WelcomeNavbar from "../components/WelcomeNavbar"
+import useUser from "../hooks/useUser"
 
 const Welcome = () => {
+
+    const { login, isLogged } = useUser()
+
+    useEffect(() => {
+        if(isLogged) window.location.href = '/home'
+    }, [isLogged])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        //get the input
+        const name = e.target.name.value
+        //set the user using the hook
+        login({name})
+    }
 
     return (
         <>
@@ -18,9 +33,10 @@ const Welcome = () => {
                         <h2 className="sm:text-5xl text-4xl"><strong>Welcome!</strong></h2>
                         <p className="sm:text-3xl text-xl">This is just the begining, let's grow <strong>together.</strong></p>
                     </div>
-                    <Link to='/home' className="w-3/5">
-                        <button className="primary-btn sm:text-6xl text-3xl w-full sm:px-6 sm:py-8 rounded-full ">Start</button>
-                    </Link>
+                    <form className="flex flex-col sm:w-3/5 w-full gap-6" onSubmit={handleSubmit}>
+                        <input type="text" placeholder="Your name" name="name" required className="sm:text-5xl text-xl text-center border-b-4  p-2" />
+                        <button type="submit" className="primary-btn w-full bg-black sm:text-4xl text-3xl sm:px-6 sm:py-8 rounded-full">Start</button>
+                    </form>
                 </div>
             </div>
         </>

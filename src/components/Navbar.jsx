@@ -3,9 +3,12 @@ import { LuMenuSquare } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { GrPowerShutdown } from "react-icons/gr";
+import useUser from '../hooks/useUser'
 import './Navbar.css'
 
 const Navbar = () => {
+
+    const { logout } = useUser()
 
     const showSidebar = () => {
         const sidebar = document.querySelector('.sidebar')
@@ -15,6 +18,15 @@ const Navbar = () => {
     const hideSidebar = () => {
         const sidebar = document.querySelector('.sidebar')
         sidebar.style.display = 'none'
+    }
+
+    const handleShutDown = () => {
+        //hide the sidebar
+        hideSidebar()
+        //using the hook to logout
+        logout()
+        //redirect to the welcome page
+        window.location.href = '/'
     }
 
     return (
@@ -33,7 +45,7 @@ const Navbar = () => {
                     <li onClick={hideSidebar}>
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
-                    <li onClick={hideSidebar}>
+                    <li onClick={handleShutDown}>
                         <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
                     </li>
                     <li onClick={hideSidebar}>
