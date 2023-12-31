@@ -8,8 +8,8 @@ export default function useUser() {
         //set token and user data in local storage (hybrid storage)
         //we save the user data as a string because local storage only stores strings
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('tables', JSON.stringify(null));
-        localStorage.setItem('tasks', JSON.stringify(null));
+        localStorage.setItem('tables', JSON.stringify({}));
+        localStorage.setItem('tasks', JSON.stringify({}));
         setUser(user);
     }, [setUser]);
 
@@ -25,6 +25,8 @@ export default function useUser() {
         isLogged: Boolean(user),
         login,
         logout,
-        user
+        user,
+        userTasks,
+        userTables
     };
 }
