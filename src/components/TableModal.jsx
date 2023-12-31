@@ -1,8 +1,11 @@
 import { FaPlus } from "react-icons/fa"
+import useUser from "../hooks/useUser"
 
 const TableModal = (props) => {
 
-    const { show, setShow, setTables } = props
+    const { show, setShow} = props
+
+    const { addTable, updateTable, removeTable } = useUser()
 
     if (!show) {
         return null
@@ -10,16 +13,14 @@ const TableModal = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.title.value)
-        console.log(e.target.description.value)
-
-        //set the new table in the tables array (this could be done with a database or context provider)
-        //in this case, we will use the setTables function from the Tables component to update the state
-        setTables(prevState => [...prevState, {
-            id: prevState.length + 1,
+        //using custom hook to add the table to the user tables
+        addTable({
+            id: crypto.randomUUID(),
             title: e.target.title.value,
-            data: e.target.description.value
-        }])
+            data: e.target.description.value,
+            tasks: []
+        })
+
         setShow(false)
     }
 

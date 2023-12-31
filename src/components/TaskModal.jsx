@@ -1,8 +1,11 @@
+import useUser from "../hooks/useUser"
 import { FaPlus } from "react-icons/fa"
 
 const TaskModal = (props) => {
 
-    const { show, setShow, setTableTasks, table_id, action = 'create', task } = props
+    const { show, setShow, table_id, action = 'create', task } = props
+
+    const { addTask, updateTask } = useUser()
 
     if (!show) {
         return null
@@ -16,42 +19,37 @@ const TaskModal = (props) => {
             createTask(e)
         } else if (action === 'edit') {
             editTask(e)
-            console.log(task)
         }
 
     }
 
     const createTask = (e) => {
-        //set the new table in the tables array (this could be done with a database or context provider)
-        //in this case, we will use the setTables function from the Tables component to update the state
-        setTableTasks(prevState => [...prevState, {
+
+        //using the addTask function from the useUser hook
+        addTask({
             id: crypto.randomUUID(),
             table_id: e.target.table_id.value,
             title: e.target.title.value,
             description: e.target.description.value,
             status: e.target.status.value,
             date: new Date().toLocaleDateString()
-        }])
+        })
         setShow(false)
     }
 
     const editTask = (e) => {
-        //on edit, we will find the task in the tasks array and update it
-        //in this case, we will use the setTableTasks function from the Table component to update the state
-        setTableTasks(prevState => {
-            const taskIndex = prevState.findIndex(task => task.id === e.target.id.value)
-            prevState[taskIndex] = {
-                id: e.target.id.value,
-                table_id: e.target.table_id.value,
-                title: e.target.title.value,
-                description: e.target.description.value,
-                status: e.target.status.value,
-                date: new Date().toLocaleDateString()
-            }
-            setShow(false)
-            return prevState
-        }
-        )
+
+        //using the updateTask function from the useUser hook
+        updateTask({
+            id: e.target.id.value,
+            table_id: e.target.table_id.value,
+            title: e.target.title.value,
+            description: e.target.description.value,
+            status: e.target.status.value,
+            date: new Date().toLocaleDateString()
+        })
+        setShow(false)
+
     }
 
     const handleDelete = () => {

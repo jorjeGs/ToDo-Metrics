@@ -2,7 +2,14 @@ import useUser from "../hooks/useUser"
 
 const HomePage = () => {
 
-    const { user, userTasks, userTables } = useUser()
+    const { user, userTables } = useUser()
+
+    //get the total number of tasks from the user tables
+    const userTasks = userTables.map(table => table.tasks).flat()
+
+
+    //get the number of tasks done from the user tables
+    const userTasksDone = userTasks.filter(task => task.status == 'done')
 
     return (
         <>
@@ -19,7 +26,7 @@ const HomePage = () => {
                     </div>
                     <div className="text-center">
                         <h2 className="text-3xl sm:text-4xl">Done</h2>
-                        <p className="text-4xl sm:text-6xl"><strong className="text-green-700">{userTasks.length == 0 ? 0 : ( userTasks.filter(task => task.status == 'done').length )}</strong></p>
+                        <p className="text-4xl sm:text-6xl"><strong className="text-green-700">{userTasksDone.length == 0 ? 0 : ( userTasks.filter(task => task.status == 'done').length )}</strong></p>
                     </div>
                 </div>
             </div>

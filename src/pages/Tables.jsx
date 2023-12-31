@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import useUser from "../hooks/useUser";
 import TableCard from "../components/TableCard"
 import TableModal from "../components/TableModal";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -6,36 +7,35 @@ import { FaPlus, FaSearch } from "react-icons/fa";
 
 const Tables = () => {
 
-    const originalTables = [
-        {
-            id: 1,
-            title: 'Table 1',
-            data: 'Pedro pica papas con un pico pica papas pepe pecas papas papas.'
-        },
-        {
-            id: 2,
-            title: 'Table 2',
-            data: 'Buenas tardes'
-        },
-    ]
+    // const originalTables = [
+    //     {
+    //         id: 1,
+    //         title: 'Table 1',
+    //         data: 'Pedro pica papas con un pico pica papas pepe pecas papas papas.'
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Table 2',
+    //         data: 'Buenas tardes'
+    //     },
+    // ]
 
-    //this could be restructured to come from a database or context provider (like redux)
-    const [tables, setTables] = useState(originalTables)
+    const { userTables } = useUser()
 
     const [filteredTables, setFilteredTables] = useState([])
 
     const [show, setShow] = useState(false)
 
     useEffect(() => {
-        setFilteredTables(tables)
-    }, [tables])
+        setFilteredTables(userTables)
+    }, [userTables])
 
     const handleSearch = (e) => {
         e.preventDefault()
 
         const input = e.target.search
         const value = input.value.toLowerCase()
-        const filtered = tables.filter(table => table.title.toLowerCase().includes(value))
+        const filtered = userTables.filter(table => table.title.toLowerCase().includes(value))
         setFilteredTables(filtered)
 
         //also set to display inline the clear button, wich is outside the form, using not querySelector but getElementById
@@ -44,7 +44,7 @@ const Tables = () => {
     }
 
     const clearSearch = () => {
-        setFilteredTables(tables)
+        setFilteredTables(userTables)
         document.querySelector('input[name="search"]').value = ''
         document.getElementById('clear').style.display = 'none'
     }
@@ -73,15 +73,15 @@ const Tables = () => {
                     {
                         filteredTables.length != 0 ? (
                             filteredTables.map(table => (
-                                <TableCard key={table.id} id={table.id} title={table.title} data={table.data} />
+                                <TableCard key={table.id} tableInfo={table} />
                             ))
                         ) : (
-                            <p>No tables found</p>
+                            null
                         )
                     }
                 </div>
                 {
-                    show && <TableModal show={show} setShow={setShow} setTables={setTables} />
+                    show && <TableModal show={show} setShow={setShow} />
                 }
             </div>
         </>
