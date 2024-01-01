@@ -5,7 +5,7 @@ const TableModal = (props) => {
 
     const { show, setShow} = props
 
-    const { addTable, updateTable, removeTable } = useUser()
+    const { addTable, updateTable } = useUser()
 
     if (!show) {
         return null
@@ -32,9 +32,12 @@ const TableModal = (props) => {
                     <form className="flex flex-col justify-center items-center w-full h-full gap-4" onSubmit={handleSubmit}>
                         <input type="text" name="title" id="title" placeholder="Title" className="w-full h-12 border-2 border-gray-200 rounded-md p-2" required/>
                         <textarea name="description" id="description" placeholder="Description" className="w-full h-32 border-2 border-gray-200 rounded-md p-2" required/>
-                        <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />Create</button>
+                        <div className="flex justify-center items-center w-full gap-2">
+                            <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />Create</button>
+                            <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" type="button" onClick={() => setShow(false)}>Close</button>
+                        </div>
                     </form>
-                    <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" onClick={() => setShow(false)}>Close</button>
+                    
                 </div>
             </div>
         </>

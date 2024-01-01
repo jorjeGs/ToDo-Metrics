@@ -33,8 +33,8 @@ const Welcome = () => {
                         <h2 className="sm:text-5xl text-4xl"><strong>Welcome!</strong></h2>
                         <p className="sm:text-3xl text-xl">This is just the begining, let's grow <strong>together.</strong></p>
                     </div>
-                    <form className="flex flex-col sm:w-3/5 w-full gap-6" onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Your name" name="name" required className="sm:text-5xl text-xl text-center border-b-4  p-2" />
+                    <form className="flex flex-col sm:w-3/5 w-full justify-center items-center gap-6" onSubmit={handleSubmit}>
+                        <input type="text" placeholder="Your name" name="name" required className="lg:text-5xl text-3xl text-center border-b-4 p-2 w-3/4 sm:w-full" />
                         <button type="submit" className="primary-btn w-full bg-black sm:text-4xl text-3xl sm:px-6 sm:py-8 rounded-full">Start</button>
                     </form>
                 </div>

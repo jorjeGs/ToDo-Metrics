@@ -41,7 +41,7 @@ const Table = () => {
                         <Link to="/home/tables"><FaArrowLeft className="sm:text-4xl text-3xl text-gray-600 my-auto mx-auto" /></Link>
                     </div>
                     <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 text-center text-balance mt-4 mx-auto">{table.title}</h1>
-                    <p className="table-description sm:text-2xl text-balance mx-auto text-gray-400" >{table.data}</p>
+                    <p className="table-description sm:text-2xl text-balance text-center mx-auto text-gray-400" >{table.data}</p>
                     <p className="text-gray-600 sm:text-2xl mx-auto"><strong className="text-blue-700">Create</strong> or <strong className="text-green-700">click</strong> an existing <strong>task</strong></p>
                 </div>
                 {/* on sm screens, the row will be width-screen-size, and will horizontally scroll, with breakpoints to prevent incomplete view of row */}

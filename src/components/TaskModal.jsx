@@ -5,7 +5,7 @@ const TaskModal = (props) => {
 
     const { show, setShow, table_id, action = 'create', task } = props
 
-    const { addTask, updateTask } = useUser()
+    const { addTask, updateTask, deleteTask } = useUser()
 
     if (!show) {
         return null
@@ -59,12 +59,12 @@ const TaskModal = (props) => {
         if (!window.confirm('Are you sure you want to delete this task?')) {
             return
         }
-        setTableTasks(prevState => {
-            const taskIndex = prevState.findIndex(task => task.id === task.id)
-            prevState.splice(taskIndex, 1)
-            setShow(false)
-            return prevState
+        //using the deleteTask function from the useUser hook
+        deleteTask({
+            id: task.id,
+            table_id: task.table_id
         })
+        setShow(false)
     }
 
     return (
@@ -79,18 +79,26 @@ const TaskModal = (props) => {
                             task && <input type="text" name="id" id="id" hidden defaultValue={task.id} />
                         }
                         <input type="text" name="table_id" id="table_id" hidden defaultValue={task ? task.table_id : table_id} />
-                        <select name="status" id="status" defaultValue={task ? task.status : ''} className="w-full h-12 border-2 border-gray-200 rounded-md p-2" required>
-                            <option value="todo">To do</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                        </select>
+                        <div className="flex justify-center items-center w-full gap-2">
+                            <select name="status" id="status" defaultValue={task ? task.status : ''} className="w-full h-12 border-2 border-gray-200 rounded-md p-2" required>
+                                <option value="todo">To do</option>
+                                <option value="doing">Doing</option>
+                                <option value="done">Done</option>
+                            </select>
+                            {
+                                task && <p className="text-gray-400">Created at <strong>{task.date}</strong></p>
+                            }
+                        </div>
                         <textarea name="description" id="description" placeholder="Description" defaultValue={task ? task.description : ''} className="w-full h-32 border-2 border-gray-200 rounded-md p-2" required />
-                        <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />{action == 'edit' ? 'Edit' : 'Create'}</button>
+                        <div className="flex justify-center items-center w-full gap-2">
+                            <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />{action == 'edit' ? 'Edit' : 'Create'}</button>
+                            {
+                                task && <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" type="button" onClick={() => handleDelete()}>Delete</button>
+                            }
+                            <button className="bg-black primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" type="button" onClick={() => setShow(false)}>Close</button>
+                        </div>
                     </form>
-                    {
-                        task && <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" onClick={() => handleDelete()}>Delete</button>
-                    }
-                    <button className="bg-black primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" onClick={() => setShow(false)}>Close</button>
+
                 </div>
             </div>
         </>

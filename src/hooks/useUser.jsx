@@ -64,6 +64,21 @@ export default function useUser() {
 
     } , [userTables, setUserTables]);
 
+    const deleteTask = useCallback((task) => {
+        //since the task is an element of a table, we need to find the table to add the task to it
+        const tableId = task.table_id;
+        //find the table
+        const table = userTables.find(table => table.id == tableId);
+        //find the task
+        const taskId = task.id;
+        //update task from the table
+        table.tasks = table.tasks.filter(prevTask => prevTask.id != taskId);
+        //update table from the user tables
+        setUserTables(userTables.map(table => table.id == tableId ? table : table));
+        //update table from the local storage
+        localStorage.setItem('tables', JSON.stringify(userTables.map(table => table.id == tableId ? table : table)));
+    }, [userTables, setUserTables]);
+
     return {
         isLogged: Boolean(user),
         login,
@@ -73,6 +88,7 @@ export default function useUser() {
         addTable,
         addTask,
         updateTable,
-        updateTask
+        updateTask,
+        deleteTask
     };
 }
