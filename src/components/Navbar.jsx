@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link, Navigate } from 'react-router-dom';
 import { LuMenuSquare } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { GrPowerShutdown } from "react-icons/gr";
+import useUser from '../hooks/useUser'
 import './Navbar.css'
 
 const Navbar = () => {
+
+    const { logout } = useUser()
 
     const showSidebar = () => {
         const sidebar = document.querySelector('.sidebar')
@@ -15,6 +19,17 @@ const Navbar = () => {
     const hideSidebar = () => {
         const sidebar = document.querySelector('.sidebar')
         sidebar.style.display = 'none'
+    }
+
+    const handleShutDown = () => {
+        //hide the sidebar
+        hideSidebar()
+        //remove the user from the local storage
+        localStorage.removeItem('user')
+        localStorage.removeItem('tables')
+        localStorage.removeItem('tasks')
+        //using the hook to logout
+        logout()
     }
 
     return (
@@ -33,7 +48,7 @@ const Navbar = () => {
                     <li onClick={hideSidebar}>
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
-                    <li onClick={hideSidebar}>
+                    <li onClick={handleShutDown}>
                         <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
                     </li>
                     <li onClick={hideSidebar}>
@@ -54,7 +69,7 @@ const Navbar = () => {
                         <Link to='/home/metrics'>Metrixs</Link>
                     </li>
                     <li className='hideOnMobile'>
-                        <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
+                        <Link to='/'><GrPowerShutdown onClick={handleShutDown} className='text-3xl text-red-500' /></Link>
                     </li>
                     <li className='hideOnMobile'>
                         <a href='https://github.com/jorjeGs/ToDo-Metrics' target="_blank" rel="noopener noreferrer"><FaGithub className='text-2xl' /></a>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import useUser from "../hooks/useUser"
 import { Link } from "react-router-dom"
 import { FaArrowLeft, FaPlus } from "react-icons/fa"
 import TaskCard from "../components/TaskCard"
@@ -7,6 +8,15 @@ import TaskModal from "../components/TaskModal"
 const Table = () => {
     //get the id from the url
     const id = window.location.href.split('/').pop()
+
+    //get the table info from the custom hook, especifically the filtered tables by id
+    const { userTables } = useUser()
+    const tableInfo = userTables.filter(table => table.id === id)[0]
+
+    const [table, setTable] = useState([])
+
+    //state for the tasks of the table
+    const [tasks, setTasks ] = useState([])
 
     //state for the modal
     const [show, setShow] = useState(false)
@@ -17,17 +27,11 @@ const Table = () => {
     //state for controlling selected task
     const [selectedTask, setSelectedTask] = useState(null)
 
-    //tasks would be fetched from the database or the context, filtered by table_id
-    //it would be something like this:
-    //tasksContext will be imported from the context file and will contain all the tasks
-    // const { tasks } = useContext(TasksContext)
-    // const filteredTasks = tasks.filter(task => task.table_id === id)
-
-    const [tableTasks, setTableTasks] = useState([])
 
     useEffect(() => {
-        setTableTasks([])
-    }, [])
+        setTable(tableInfo)
+        setTasks(tableInfo.tasks)
+    }, [userTables])
 
     return (
         <>
@@ -36,7 +40,8 @@ const Table = () => {
                     <div className="go-back-btn flex sm:w-64 w-1/4 h-12 items-center bg-gray-200 shadow-md rounded-full my-auto">
                         <Link to="/home/tables"><FaArrowLeft className="sm:text-4xl text-3xl text-gray-600 my-auto mx-auto" /></Link>
                     </div>
-                    <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mt-4 mx-auto">Table {id}</h1>
+                    <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 text-center text-balance mt-4 mx-auto">{table.title}</h1>
+                    <p className="table-description sm:text-2xl text-balance text-center mx-auto text-gray-400" >{table.data}</p>
                     <p className="text-gray-600 sm:text-2xl mx-auto"><strong className="text-blue-700">Create</strong> or <strong className="text-green-700">click</strong> an existing <strong>task</strong></p>
                 </div>
                 {/* on sm screens, the row will be width-screen-size, and will horizontally scroll, with breakpoints to prevent incomplete view of row */}
@@ -57,9 +62,9 @@ const Table = () => {
                                 </button>
                             </div>
                             {
-                                tableTasks.length != 0 ? (
-                                    tableTasks.map(task => (
-                                        task.status === 'todo' && <TaskCard key={task.id} id={task.id} table_id={task.table_id} title={task.title} description={task.description} status={task.status} date={task.date} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
+                                tasks.length != 0 ? (
+                                    tasks.map(task => (
+                                        task.status === 'todo' && <TaskCard key={task.id} task={task} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
                                     ))
                                 ) : (
                                     null
@@ -73,9 +78,9 @@ const Table = () => {
                         </div>
                         <div className="tasks-container flex flex-col w-full h-full text-center gap-4">
                             {
-                                tableTasks.length != 0 ? (
-                                    tableTasks.map(task => (
-                                        task.status === 'doing' && <TaskCard key={task.id} id={task.id} table_id={task.table_id} title={task.title} description={task.description} status={task.status} date={task.date} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
+                                tasks.length != 0 ? (
+                                    tasks.map(task => (
+                                        task.status === 'doing' && <TaskCard key={task.id} task={task} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
                                     ))
                                 ) : (
                                     null
@@ -89,9 +94,9 @@ const Table = () => {
                         </div>
                         <div className="tasks-container flex flex-col w-full h-full text-center gap-4">
                             {
-                                tableTasks.length != 0 ? (
-                                    tableTasks.map(task => (
-                                        task.status === 'done' && <TaskCard key={task.id} id={task.id} table_id={task.table_id} title={task.title} description={task.description} status={task.status} date={task.date} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
+                                tasks.length != 0 ? (
+                                    tasks.map(task => (
+                                        task.status === 'done' && <TaskCard key={task.id} task={task} setAction={setAction} setShow={setShow} setTask={setSelectedTask} />
                                     ))
                                 ) : (
                                     null
@@ -101,7 +106,7 @@ const Table = () => {
                     </div>
                 </div>
                 {
-                    show && <TaskModal show={show} setShow={setShow} setTableTasks={setTableTasks} table_id={id} action={action} task={selectedTask} />
+                    show && <TaskModal show={show} setShow={setShow} table_id={id} action={action} task={selectedTask} />
                 }
             </div>
         </>

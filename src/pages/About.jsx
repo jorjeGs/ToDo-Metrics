@@ -39,7 +39,7 @@ const About = () => {
                 <div className="relative bg-gray-200 h-auto min-h-1/2 p-3">
                     <div className='flex flex-col justify-center items-center gap-6'>
                         <div className='flex flex-col justify-center items-center text-center mt-4 md:gap-6 gap-4'>
-                            <img className='md:w-1/6 w-1/12 mx-auto' src='/todo-logo.svg' alt='Taskflow' />
+                            <img className='md:w-1/6 w-3/12 mx-auto' src='/todo-logo.svg' alt='Taskflow' />
                             <h1 className='text-4xl text-black font-bold'>Taskflow</h1>
                             <h2 className='sm:text-xl text-md text-balance text-black'><strong className='text-blue-600'>Taskflow</strong> was made thinking as a Trello-based app with <strong>no registered account need</strong>.</h2>
                             <h2 className='sm:text-xl text-md text-balance text-black'>Organize your daily tasks with your progress <strong>locally storage</strong> in your browser.</h2>

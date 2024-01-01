@@ -1,8 +1,11 @@
 import { FaPlus } from "react-icons/fa"
+import useUser from "../hooks/useUser"
 
 const TableModal = (props) => {
 
-    const { show, setShow, setTables } = props
+    const { show, setShow} = props
+
+    const { addTable, updateTable } = useUser()
 
     if (!show) {
         return null
@@ -10,16 +13,14 @@ const TableModal = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.title.value)
-        console.log(e.target.description.value)
-
-        //set the new table in the tables array (this could be done with a database or context provider)
-        //in this case, we will use the setTables function from the Tables component to update the state
-        setTables(prevState => [...prevState, {
-            id: prevState.length + 1,
+        //using custom hook to add the table to the user tables
+        addTable({
+            id: crypto.randomUUID(),
             title: e.target.title.value,
-            data: e.target.description.value
-        }])
+            data: e.target.description.value,
+            tasks: []
+        })
+
         setShow(false)
     }
 
@@ -31,9 +32,12 @@ const TableModal = (props) => {
                     <form className="flex flex-col justify-center items-center w-full h-full gap-4" onSubmit={handleSubmit}>
                         <input type="text" name="title" id="title" placeholder="Title" className="w-full h-12 border-2 border-gray-200 rounded-md p-2" required/>
                         <textarea name="description" id="description" placeholder="Description" className="w-full h-32 border-2 border-gray-200 rounded-md p-2" required/>
-                        <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />Create</button>
+                        <div className="flex justify-center items-center w-full gap-2">
+                            <button type="submit" className="bg-green-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2"><FaPlus />Create</button>
+                            <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" type="button" onClick={() => setShow(false)}>Close</button>
+                        </div>
                     </form>
-                    <button className="bg-red-700 primary-btn w-full h-12 rounded-full flex justify-center items-center gap-2" onClick={() => setShow(false)}>Close</button>
+                    
                 </div>
             </div>
         </>
