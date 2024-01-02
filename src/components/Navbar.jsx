@@ -45,9 +45,9 @@ const Navbar = () => {
                     <li onClick={hideSidebar}>
                         <Link to='/home/tables'>Tables</Link>
                     </li>
-                    <li onClick={hideSidebar}>
-                        <Link to='/home/metrics'>Metrixs</Link>
-                    </li>
+                    {/* <li onClick={hideSidebar}>
+                        <Link to='/home/metrics'>Metrics</Link>
+                    </li> */}
                     <li onClick={handleShutDown}>
                         <Link to='/'><GrPowerShutdown className='text-3xl text-red-500' /></Link>
                     </li>
@@ -65,9 +65,9 @@ const Navbar = () => {
                     <li className='hideOnMobile'>
                         <Link to='/home/tables'>Tables</Link>
                     </li>
-                    <li className='hideOnMobile'>
-                        <Link to='/home/metrics'>Metrixs</Link>
-                    </li>
+                    {/* <li className='hideOnMobile'>
+                        <Link to='/home/metrics'>Metrics</Link>
+                    </li> */}
                     <li className='hideOnMobile'>
                         <Link to='/'><GrPowerShutdown onClick={handleShutDown} className='text-3xl text-red-500' /></Link>
                     </li>
