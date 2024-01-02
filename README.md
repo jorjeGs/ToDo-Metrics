@@ -69,7 +69,7 @@ API was deployed on Render with the following build and start commands:
   npm run build
   npm start
   ```
-[Link to app](https://cookio-app.onrender.com)
+[Link to app](https://taskflow-app.onrender.com)
 <!-- CONTACT -->
 ## Contact
 
