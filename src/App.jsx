@@ -11,7 +11,7 @@ import './App.css'
 function App() {
 
   return (
-    <main className='App'>
+    <main className='App dark:bg-neutral-900'>
       <UserContextProvider>
         <BrowserRouter>
           <Routes>

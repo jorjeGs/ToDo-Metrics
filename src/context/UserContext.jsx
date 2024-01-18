@@ -25,8 +25,25 @@ export function UserContextProvider({children}) {
         return JSON.parse(localStorage.getItem('tables')) || []
     });
 
+    //state for theme
+    const [theme, setTheme] = useState(() => {
+        //check if the user has a preference, getting the item from local storage
+        const localTheme = localStorage.getItem('theme');
+        //if the user has a preference, return it
+        if (localTheme) return localTheme;
+        //if the user doesn't have a preference, return the default theme
+        else{
+            //check if the user's browser has a preference
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return "dark"
+            } else {
+                return "light"
+            }
+        }
+    })
+
     //then, send it to the provider
-    return <Context.Provider value={{user, setUser, userTasks, setUserTasks, userTables, setUserTables }}>
+    return <Context.Provider value={{user, setUser, theme, setTheme, userTasks, setUserTasks, userTables, setUserTables }}>
         {children}
     </Context.Provider>
 }

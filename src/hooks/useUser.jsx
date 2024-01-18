@@ -2,7 +2,7 @@ import Context from "../context/UserContext";
 import { useCallback, useContext } from "react";
 
 export default function useUser() {
-    const { user, setUser, userTables, setUserTables } = useContext(Context);
+    const { user, setUser, userTables, setUserTables, theme, setTheme } = useContext(Context);
 
     const login = useCallback((user) => {
         //set token and user data in local storage (hybrid storage)
@@ -79,6 +79,13 @@ export default function useUser() {
         localStorage.setItem('tables', JSON.stringify(userTables.map(table => table.id == tableId ? table : table)));
     }, [userTables, setUserTables]);
 
+    const handleTheme = useCallback(() => {
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"))
+        //save the theme in the local storage, remembering that we cant use the theme state because it is async and we need the theme right away
+        //so we use the prevTheme to get the theme before the update and save it in the local storage
+        localStorage.setItem('theme', theme === "dark" ? "light" : "dark");
+    }, [theme, setTheme]);
+
     return {
         isLogged: Boolean(user),
         login,
@@ -89,6 +96,8 @@ export default function useUser() {
         addTask,
         updateTable,
         updateTask,
-        deleteTask
+        deleteTask,
+        theme,
+        handleTheme
     };
 }

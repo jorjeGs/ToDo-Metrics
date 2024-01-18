@@ -27,10 +27,6 @@
     justify-content: center;
 }
 
-.menu a:hover{
-    background-color: #f2f2f2;
-}
-
 .menu li:first-child{
     margin-right: auto;
 }
