@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import WelcomeNavbar from "../components/WelcomeNavbar"
 import useUser from "../hooks/useUser"
 
@@ -10,16 +10,6 @@ const Welcome = () => {
         if (isLogged) window.location.href = '/home'
     }, [isLogged])
 
-    //useEffect for the theme
-    useEffect(() => {
-        if (theme === "dark") {
-            document.body.classList.add("dark")
-        } else {
-            document.body.classList.remove("dark")
-        }
-    }, [theme])
-    
-
     const handleSubmit = (e) => {
         e.preventDefault()
         //get the input
@@ -28,6 +18,15 @@ const Welcome = () => {
         login({ name })
     }
 
+    //useEffect for theme
+    useEffect(() => {
+        if (theme === "dark") {
+            document.querySelector('html').classList.add("dark")
+        } else {
+            document.querySelector('html').classList.remove("dark")
+        }
+    }, [theme])
+    
     const handleChangeTheme = () => {
         handleTheme()
     }
