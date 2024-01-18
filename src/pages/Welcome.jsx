@@ -18,15 +18,6 @@ const Welcome = () => {
         login({ name })
     }
 
-    //useEffect for theme
-    useEffect(() => {
-        if (theme === "dark") {
-            document.querySelector('html').classList.add("dark")
-        } else {
-            document.querySelector('html').classList.remove("dark")
-        }
-    }, [theme])
-    
     const handleChangeTheme = () => {
         handleTheme()
     }
