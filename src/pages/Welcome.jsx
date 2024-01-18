@@ -63,7 +63,7 @@ l-135 145 -32 -33 c-17 -18 -75 -80 -128 -136 l-96 -104 194 -206 c106 -114
                     </form>
                 </div>
                 {/* Button to change theme (dark or light), this button will have a position absolute to outcome for the main content */}
-                <button className="primary-btn mt-auto rounded-full dark:bg-white dark:hover:bg-black dark:text-black dark:hover:text-white" onClick={() => handleChangeTheme()}>
+                <button className="primary-btn absolute top-14 m-2 p-2 rounded-full dark:bg-white dark:hover:bg-black dark:text-black dark:hover:text-white" onClick={() => handleChangeTheme()}>
                     Try {
                         theme === "dark" ? "Light" : "Dark"
                     } Mode
