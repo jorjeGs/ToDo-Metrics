@@ -23,12 +23,7 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    color : black;
     justify-content: center;
-}
-
-.menu a:hover{
-    background-color: #f2f2f2;
 }
 
 .menu li:first-child{
