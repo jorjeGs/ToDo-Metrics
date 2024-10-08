@@ -1,14 +1,19 @@
 import { useEffect } from "react"
 import WelcomeNavbar from "../components/WelcomeNavbar"
 import useUser from "../hooks/useUser"
+import { useNavigate } from "react-router-dom"
 
 const Welcome = () => {
 
     const { login, isLogged, theme, handleTheme } = useUser()
 
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        if (isLogged) window.location.href = '/home'
-    }, [isLogged])
+        if (isLogged) {
+            navigate("/home");
+        }
+    }, [isLogged, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault()
